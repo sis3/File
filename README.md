@@ -3,24 +3,29 @@ https://drive.google.com/file/d/1OnTCM0tgtnrO8AKtgE0EUCayikKrksI_/view?usp=drive
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="index.php" />
+                <add value="default.aspx" />
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="index.htm" />
+                <add value="index.html" />
+            </files>
+        </defaultDocument>
+        <handlers accessPolicy="Read, Execute, Script" />
         <rewrite>
             <rules>
-                <rule name="Ignore Existing Files/Directories" stopProcessing="true">
-                    <match url="^(.*)$" />
+                <rule name="Imported Rule 2" stopProcessing="true">
+                    <match url="^(.*)$" ignoreCase="false" />
                     <conditions logicalGrouping="MatchAll">
-                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="false" />
-                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="false" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
                     </conditions>
-                    <action type="None" />
-                </rule>
-
-                <rule name="Redirect to Public Index" stopProcessing="true">
-                    <match url="^(.*)$" />
-                    <action type="Rewrite" url="public/index.php" />
+                    <action type="Rewrite" url="public/{R:1}" />
                 </rule>
             </rules>
         </rewrite>
-
-        <directoryBrowse enabled="false" />
     </system.webServer>
-</configuration>
+</configuration> 
