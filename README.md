@@ -6,7 +6,7 @@ https://drive.google.com/file/d/1OnTCM0tgtnrO8AKtgE0EUCayikKrksI_/view?usp=drive
     <rewrite>
       <rules>
         <rule name="Laravel" stopProcessing="true">
-          <match url="^(.*)$" ignoreCase="false" />
+          <match url="^(.*)$" />
           <conditions logicalGrouping="MatchAll">
             <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
             <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
@@ -15,5 +15,12 @@ https://drive.google.com/file/d/1OnTCM0tgtnrO8AKtgE0EUCayikKrksI_/view?usp=drive
         </rule>
       </rules>
     </rewrite>
+    <defaultDocument>
+      <files>
+        <clear />
+        <add value="index.php" />
+      </files>
+    </defaultDocument>
   </system.webServer>
 </configuration>
+
